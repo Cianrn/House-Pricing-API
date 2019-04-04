@@ -87,7 +87,7 @@ def form():
 		inputs.append([crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, b, lstat])
 
 		## Standardize data
-		sc_X = joblib.load('./Boston/sc_X.pkl')
+		sc_X = joblib.load('./Boston_models/sc_X.pkl')
 		x_test = np.array(inputs).reshape([1, 13])
 		x_test_sc = sc_X.transform(x_test)
 
@@ -95,12 +95,17 @@ def form():
 		nn = NeuralNet(learning_rate=0.001) 
 		nn.load_model()
 		prediction_nn = nn.predict(x_test_sc)[0][0][0]
+
+		## Load SVR Model
+		clf = joblib.load('./Boston_models/model_svr.pkl')
+		prediction_svr = clf.predict(x_test_sc)[0]
 			
 
 		return '''<p>For Inputs:</p> 
 					<p>{0}<p/>
 
-					<p>Prediction is: {1:0f}<p/>'''.format(inputs, prediction_nn)
+					<p>NN Prediction is: {1:0f}<p/> 
+					<p>SVR Prediction is:{2:0f}<p/>'''.format(inputs, prediction_nn, prediction_svr)
 
 	else:
 		return '''<form method="POST">
@@ -126,17 +131,18 @@ if __name__ == '__main__':
 
 ## Sample dict for prediction
 # {
-# 	"CRIM": 10,
-# 	"ZN": 20,
-# 	"INDUS": 30,
-# 	"CHAS": 5,
-# 	"NOX": 5,
-# 	"RM": 5,
-# 	"AGE": 10,
-# 	"DIS": 50,
-# 	"RAD": 20,
-# 	"TAX": 5,
-# 	"PTRATIO": 10,
-# 	"B": 20,
-# 	"LSTAT": 5
+# 	"CRIM": 0.08199,
+# 	"ZN": 0.00000,
+# 	"INDUS": 13.92000,
+# 	"CHAS": 0.00000,
+# 	"NOX": 0.43700,
+# 	"RM": 6.00900,
+# 	"AGE": 42.30000,
+# 	"DIS": 5.50270,
+# 	"RAD": 4.00000,
+# 	"TAX": 289.00000,
+# 	"PTRATIO": 16.00000,
+# 	"B": 396.90000,
+# 	"LSTAT": 10.40000
 # }
+# ans=21.7
