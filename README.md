@@ -19,7 +19,12 @@ Run `python app.py` and follow the link + `/json` if you are using Postman or eq
 Else, follow link + `/form` and you can manually input variables and receive prediction
 
 Step 1: Data exploration 
--	Data statistics:
+-	Feature Overview before and after scaling:
+
+<p align="center">
+  <img src="Boston_models/boston_hist.png" width=250 height=250 /> <img src="Boston_models/boston_hist_scaled.png" width=250 height=250/>
+</p>
+
 -	No missing values or NaNs
 
 Step 2: Pre-processing
@@ -43,4 +48,8 @@ Validation Performance:
 LR: 22.702454 NN: 6.528739 SVR 8.121126
 ```
 
--	Early stopping for lm and nn to prevent overfitting. See Figure below.
+-	Early stopping for LM and NN to prevent overfitting. See Figure below for training and validation losses. NN has steeper slope.
+
+<p align="center">
+  <img src="Boston_models/boston_losses.png" width=350 height=350 /> 
+</p>
