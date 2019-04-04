@@ -31,12 +31,12 @@ def json():
 	inputs.append(content['LSTAT'])
 
 	## Uncomment to Test on Training Dataset
-	boston = load_boston()
-	X, Y = boston['data'], boston['target']
-	X = pd.DataFrame(X)
-	Y = pd.DataFrame(Y) 
-	inputs = X.ix[500, :]
-	actual_prediction = Y.ix[500, 0]
+	# boston = load_boston()
+	# X, Y = boston['data'], boston['target']
+	# X = pd.DataFrame(X)
+	# Y = pd.DataFrame(Y) 
+	# inputs = X.ix[500, :]
+	# actual_prediction = Y.ix[500, 0]
 
 	## Standardize data
 	sc_X = joblib.load('./Boston_models/sc_X.pkl')
