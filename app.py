@@ -39,7 +39,7 @@ def json():
 	actual_prediction = Y.ix[500, 0]
 
 	## Standardize data
-	sc_X = joblib.load('./Boston/sc_X.pkl')
+	sc_X = joblib.load('./Boston_models/sc_X.pkl')
 	x_test = np.array(inputs).reshape([1, 13])
 	x_test_sc = sc_X.transform(x_test)
 
@@ -49,7 +49,7 @@ def json():
 	prediction_nn = nn.predict(x_test_sc)[0][0][0]
 
 	## Load SVR Model
-	clf = joblib.load('./Boston/model_svr.pkl')
+	clf = joblib.load('./Boston_models/model_svr.pkl')
 	prediction_svr = clf.predict(x_test_sc)[0]
 
 	return '''For Inputs: 
